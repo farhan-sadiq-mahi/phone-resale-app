@@ -8,7 +8,7 @@ const Navbar = () => {
         setIsMenuOn(e.target.checked)
     }
     const pages = [
-        { name: "Home", to: '/home' },
+        { name: "Home", to: '/' },
         { name: "All Categories", to: '/allcategories' },
         { name: "Services", to: '/home' },
         { name: "Pricing", to: '/home' },
