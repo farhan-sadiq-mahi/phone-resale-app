@@ -9,7 +9,7 @@ const Navbar = () => {
     }
     const pages = [
         { name: "Home", to: '/home' },
-        { name: "About Us", to: '/home' },
+        { name: "All Categories", to: '/allcategories' },
         { name: "Services", to: '/home' },
         { name: "Pricing", to: '/home' },
         { name: "Contact", to: '/home' }
