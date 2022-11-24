@@ -37,7 +37,7 @@ const SignUp = () => {
             return
         }
         const jwtToken = currentUser => {
-            fetch('https://all-time-photography-server-farhan-sadiq-mahi.vercel.app/jwt', {
+            fetch('', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
