@@ -1,24 +1,21 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../../SharedComponent/Loader';
 
 const Category = () => {
-    const [categories, setCategories] = useState([]);
 
+    const { data: categories, isLoading } = useQuery({
+        queryKey: ['categories'],
+        queryFn: () =>
+            fetch('http://localhost:5000/categories')
+                .then(res => res.json())
 
-    axios.get('http://localhost:5000/categories')
-        .then((res) => {
-            // console.log(res.data)
-            setCategories(res.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-        .then(() => {
-
-        })
-
-
+    })
+    if (isLoading) {
+        return <Loader />
+    }
 
     return (
         <div className='container mx-auto my-12'>

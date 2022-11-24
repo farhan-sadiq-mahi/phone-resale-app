@@ -5,7 +5,6 @@ import logo from '../img/logo.png'
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    console.log(user);
     const [isMenuOn, setIsMenuOn] = useState(false);
     const menuChange = e => {
         setIsMenuOn(e.target.checked)
