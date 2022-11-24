@@ -90,10 +90,10 @@ const Login = () => {
     return (
         <div>
             <div className='my-5'>
-                <div className="bg-grey-lighter min-h-screen flex flex-col">
+                <div className="bg-grey-lighter flex flex-col">
                     <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                         <form onSubmit={handleLogIn} className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                            <h1 className="mb-8 text-4xl font-bold text-secondary text-center">Log In</h1>
+                            <h1 className="mb-8 text-4xl font-bold text-info text-center">Log In</h1>
 
                             <input
                                 type="email"
@@ -111,7 +111,7 @@ const Login = () => {
 
                             <button
                                 type="submit"
-                                className="w-full text-center py-3 rounded bg-secondary text-white hover:bg-secondary-focus focus:outline-none my-1"
+                                className="w-full text-center py-3 rounded bg-info text-white hover:bg-info-focus focus:outline-none my-1"
                             >Log In</button>
                             <p className="text-error mt-3">{er}</p>
                         </form>

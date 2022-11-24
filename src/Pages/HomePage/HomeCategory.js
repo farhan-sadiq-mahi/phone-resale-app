@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Category = () => {
     const [categories, setCategories] = useState([]);
@@ -17,6 +18,8 @@ const Category = () => {
 
         })
 
+
+
     return (
         <div className='container mx-auto my-12'>
             <h1 className='text-4xl font-semibold merFont text-center my-24'>Categories</h1>
@@ -27,7 +30,7 @@ const Category = () => {
                         <figure><img src={data.img} alt="mobiles" /></figure>
                         <div className="card-body">
                             <h2 className="font-bold text-center mb-20 text-white">{data.name}</h2>
-                            <button className="btn btn-outline btn-success">See All</button>
+                            <Link to={`/category/${data.name}`} className="btn btn-outline btn-success">See All</Link>
                         </div>
                     </div>)
                 }

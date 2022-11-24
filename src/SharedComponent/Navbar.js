@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 import logo from '../img/logo.png'
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    console.log(user);
     const [isMenuOn, setIsMenuOn] = useState(false);
     const menuChange = e => {
         setIsMenuOn(e.target.checked)
@@ -43,23 +46,35 @@ const Navbar = () => {
 
 
                     <div className="lg:hidden">
-                        {/* <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src="https://www.whatsappimages.in/wp-content/uploads/2021/07/Top-HD-sad-quotes-for-whatsapp-status-in-hindi-Pics-Images-Download-Free.gif" alt='img' />
-                                </div>
-                            </label>
-                            <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                                <li>
-                                    <a href='/' className="justify-between">
-                                        Profile
-                                    </a>
-                                </li>
-                                <li><a href='/'>Settings</a></li>
-                                <li><a href='/'>Logout</a></li>
-                            </ul>
-                        </div> */}
-                        <a className="py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200" href="/">Sign In</a>
+                        {user?.uid ?
+                            <div className="dropdown dropdown-end">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        {user?.photoURL ?
+
+                                            <img
+                                                src={user.photoURL}
+                                                alt="UserImage"
+                                            />
+                                            :
+                                            <img
+                                                src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+                                                alt="UserImage"
+                                            />
+                                        }
+                                    </div>
+                                </label>
+                                <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                                    <li>
+                                        <a href='/' className="justify-between">
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li><a href='/'>Settings</a></li>
+                                    <li><Link onClick={logOut} href='/'>Logout</Link></li>
+                                </ul>
+                            </div> :
+                            <Link to={'/login'} className="py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200" href="/">Sign In</Link>}
                     </div>
 
 
@@ -75,30 +90,45 @@ const Navbar = () => {
                     </ul>
 
                     {/* sign in and sign up for lg screen */}
+                    {
+                        !user?.uid ?
+                            <>
+                                <Link to={'/login'} className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200" >Sign In</Link>
+                                <Link to={'/signup'} className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" >Sign up</Link>
+                            </>
 
-                    <a className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200" href="/">Sign In</a>
-                    <a className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="/">Sign up</a>
+                            // {/* profile and setting for the lg screen */}
+                            :
+                            <button className="hidden lg:inline-block w-10 h-10 mr-3">
+                                <div className="dropdown dropdown-end">
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            {user?.photoURL ?
 
-                    {/* profile and setting for the lg screen */}
-
-                    {/* <button className="hidden lg:inline-block w-10 h-10 mr-3" href="/">
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src="https://www.whatsappimages.in/wp-content/uploads/2021/07/Top-HD-sad-quotes-for-whatsapp-status-in-hindi-Pics-Images-Download-Free.gif" alt='img' />
+                                                <img
+                                                    src={user.photoURL}
+                                                    alt="UserImage"
+                                                />
+                                                :
+                                                <img
+                                                    src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+                                                    alt="UserImage"
+                                                />
+                                            }
+                                        </div>
+                                    </label>
+                                    <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                                        <li>
+                                            <a href='/' className="justify-between">
+                                                Profile
+                                            </a>
+                                        </li>
+                                        <li><a href='/'>Settings</a></li>
+                                        <li><Link onClick={logOut}>Logout</Link></li>
+                                    </ul>
                                 </div>
-                            </label>
-                            <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                                <li>
-                                    <a href='/' className="justify-between">
-                                        Profile
-                                    </a>
-                                </li>
-                                <li><a href='/'>Settings</a></li>
-                                <li><a href='/'>Logout</a></li>
-                            </ul>
-                        </div>
-                    </button> */}
+                            </button>
+                    }
                 </nav>
 
 
