@@ -1,15 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa'
 import { AuthContext } from '../AuthProvider/AuthProvider';
-import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
 
     const { signInPop, logIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
-    const githubProvider = new GithubAuthProvider();
-    const facebookProvider = new FacebookAuthProvider();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -123,13 +121,6 @@ const Login = () => {
                         <button onClick={() => { handleSignInPop(googleProvider) }}
                             className="w-full bg-transparent hover:bg-green-500 text-green-300 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
                         > <FaGoogle className='inline mr-1 mb-1' /> Log In With Google</button>
-
-                        <button onClick={() => { handleSignInPop(githubProvider) }}
-                            className="w-full bg-transparent hover:bg-gray-500 text-gray-300 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded my-2"
-                        > <FaGithub className='inline mr-1 mb-1' /> Log In With Github</button>
-                        <button onClick={() => { handleSignInPop(facebookProvider) }}
-                            className="w-full bg-transparent hover:bg-blue-500 text-blue-300 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                        > <FaFacebookF className='inline mr-1 mb-1' /> Log In With Facebook</button>
 
 
                         <div className="text-grey-dark mt-6">
