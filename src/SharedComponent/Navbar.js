@@ -15,7 +15,7 @@ const Navbar = () => {
         { name: "Contact", to: '/home' }
     ]
     return (
-        <div className='sticky top-0 z-10'>
+        <div className='sticky top-0 z-30'>
             {/* <!-- component --> */}
             <div className="">
                 <nav className="relative px-4 py-4 flex justify-between items-center bg-teal-300">
