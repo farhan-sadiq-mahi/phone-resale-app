@@ -158,18 +158,19 @@ const Navbar = () => {
 
                                 {
                                     pages.map((page, i) => <li key={i} className="mb-1">
-                                        <Link className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" to={page.to}>{page.name}</Link>
+                                        <Link onClick={() => { setIsMenuOn(!isMenuOn) }} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" to={page.to}>{page.name}</Link>
                                     </li>)
                                 }
                             </ul>
                         </div>
-                        <div className="mt-auto">
-                            <div className="pt-6">
-                                <a className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="/">Sign in</a>
-                                <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-secondary hover:bg-secondary-focus  rounded-xl" href="/">Sign Up</a>
-                            </div>
+                        {user?.uid ? <></> :
+                            <div className="mt-auto">
+                                <div className="pt-6">
+                                    <Link onClick={() => { setIsMenuOn(!isMenuOn) }} className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" to="/login">Sign in</Link>
+                                    <Link onClick={() => { setIsMenuOn(!isMenuOn) }} className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-secondary hover:bg-secondary-focus  rounded-xl" to="/signup">Sign Up</Link>
+                                </div>
 
-                        </div>
+                            </div>}
                     </nav>
                 </div>
             </div>
