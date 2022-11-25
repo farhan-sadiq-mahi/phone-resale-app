@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../../Layout/Dashboard";
 import Main from "../../Layout/Main";
 import AllCategories from "../../Pages/AllCategories/AllCategories";
 import CategoryItems from "../../Pages/CategoryItems/CategoryItems";
 import HomePage from "../../Pages/HomePage/HomePage";
 import Login from "../../Pages/Login";
+import MyProducts from "../../Pages/SellerDashboard/MyProducts";
 import SignUp from "../../Pages/SignUp";
 import PrivetRoute from "../PrivetRoute/PrivetRoute";
 
@@ -31,6 +33,16 @@ const routes = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />
+            }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivetRoute><Dashboard /></PrivetRoute>,
+        children: [
+            {
+                path: '/dashboard/myproducts',
+                element: <MyProducts />
             }
         ]
     }

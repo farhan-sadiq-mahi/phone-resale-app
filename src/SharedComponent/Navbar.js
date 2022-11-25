@@ -12,9 +12,7 @@ const Navbar = () => {
     const pages = [
         { name: "Home", to: '/' },
         { name: "All Categories", to: '/allcategories' },
-        { name: "Services", to: '/home' },
-        { name: "Pricing", to: '/home' },
-        { name: "Contact", to: '/home' }
+        { name: "Dashboard", to: '/dashboard' }
     ]
     return (
         <div className='sticky top-0 z-30'>
@@ -69,7 +67,7 @@ const Navbar = () => {
                                             Profile
                                         </a>
                                     </li>
-                                    <li><a href='/'>Settings</a></li>
+                                    <li><Link to='/dashboard'>Dashboard</Link></li>
                                     <li><Link onClick={logOut} href='/'>Logout</Link></li>
                                 </ul>
                             </div> :

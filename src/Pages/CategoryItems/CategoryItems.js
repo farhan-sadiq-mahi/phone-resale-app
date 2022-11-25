@@ -24,6 +24,8 @@ const CategoryItems = () => {
                     data.map(e => <CategoryItemCard key={e._id} data={e} />)
                 }
             </div>
+
+
         </div>
     );
 };

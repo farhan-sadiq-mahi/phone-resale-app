@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router-dom';
 import routes from './Routes/Routes/Routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthProvider from './AuthProvider/AuthProvider';
+import { Toaster } from 'react-hot-toast';
 
 
 const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={routes} />
+        <Toaster />
       </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
