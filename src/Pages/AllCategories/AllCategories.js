@@ -8,7 +8,6 @@ const AllCategories = () => {
 
     axios.get('http://localhost:5000/categories')
         .then((res) => {
-            // console.log(res.data)
             setCategories(res.data);
         })
         .catch((error) => {
@@ -17,7 +16,6 @@ const AllCategories = () => {
         .then(() => {
 
         })
-
 
 
     return (
@@ -29,6 +27,7 @@ const AllCategories = () => {
                 }
 
             </div>
+
         </div>
     );
 };
