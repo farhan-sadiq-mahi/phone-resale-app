@@ -83,7 +83,7 @@ const Navbar = () => {
                     <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
                         {
                             pages.map((page, i) => <li key={i} className="mb-1">
-                                <Link className="text-sm text-neutral-focus hover:text-gray-500" to={page.to}>{page.name}</Link>
+                                <Link className="text-sm text-white font-bold hover:text-gray-500" to={page.to}>{page.name}</Link>
                             </li>)
                         }
                     </ul>

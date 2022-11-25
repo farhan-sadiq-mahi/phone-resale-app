@@ -12,7 +12,7 @@ const AllCategories = () => {
             setCategories(res.data);
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
         })
         .then(() => {
 

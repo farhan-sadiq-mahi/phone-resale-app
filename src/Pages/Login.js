@@ -15,8 +15,8 @@ const Login = () => {
 
 
     const jwtToken = currentUser => {
-        console.log(currentUser)
-        fetch('https://all-time-photography-server-farhan-sadiq-mahi.vercel.app/jwt', {
+        // console.log(currentUser)
+        fetch('', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -25,7 +25,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 localStorage.setItem('jwt-token', data.token)
             })
             .catch(er => console.error(er))
@@ -38,8 +38,28 @@ const Login = () => {
                 const currentUser = {
                     email: user.email
                 }
+
+                const userInfo = {
+                    name: user.displayName,
+                    email: user?.email,
+                    img: user.photoURL,
+                    role: 'buyer'
+                };
+
+                fetch('http://localhost:5000/setuser', {
+                    method: 'POST',
+                    headers: {
+                        "content-type": 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => console.log(data))
+
+
+
                 //get jwt token
-                jwtToken(currentUser);
+                // jwtToken(currentUser);
                 navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
@@ -59,19 +79,8 @@ const Login = () => {
                 }
 
                 //get jwt token
+                jwtToken(currentUser);
 
-                fetch('https://all-time-photography-server-farhan-sadiq-mahi.vercel.app/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(currentUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        localStorage.setItem('jwt-token', data.token)
-                    })
-                    .catch(er => console.error(er))
 
                 form.reset();
                 navigate(from, { replace: true })
