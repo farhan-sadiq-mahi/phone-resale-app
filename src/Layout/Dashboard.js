@@ -15,16 +15,15 @@ const Dashboard = () => {
     if (isLoading) {
         return <Loader />
     }
-    console.log(data.userRole)
     return (
         <>
             <Navbar />
             <div className="drawer drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center">
+                <div className="drawer-content flex flex-col items-center">
                     {/* <!-- Page content here --> */}
                     <Outlet />
-                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden my-5">Dashboard Menu</label>
 
                 </div>
                 <div className="drawer-side">
