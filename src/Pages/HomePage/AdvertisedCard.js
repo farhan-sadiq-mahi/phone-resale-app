@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { GoVerified } from 'react-icons/go'
 
-const AdvertisedCard = () => {
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+
+const AdvertisedCard = ({ data }) => {
+
+    const { user } = useContext(AuthContext);
+    const [isVerified, setIsVerified] = useState(false);
+    useEffect(() => {
+        fetch(`http://localhost:5000/sellerVerified?email=${data.sellerEmail}`)
+            .then(res => res.json())
+            .then(data => setIsVerified(data.isVerified))
+    }, [data.sellerEmail])
     return (
-        <div className="flex justify-center">
-            <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                <a href="#!">
-                    <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
-                </a>
-                <div className="p-6">
-                    <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                    <p className="text-gray-700 text-base mb-4">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
+        <div className=''>
+            <div className="flex">
+                <div className="flex flex-col space-y-1">
+                    <p>seller : <span className="text-sm font-semibold">{data.sellerName}</span>{
+                        isVerified && <span title='verified'><GoVerified className='inline ml-2  text-blue-700' /></span>
+                    }
                     </p>
-                    <button type="button" className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
+                    <span className="text-xs dark:text-gray-400">{data.uploadTime}</span>
                 </div>
+            </div>
+            <div>
+                <img src={data.productImg} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
+                <h2 className="mb-1 text-xl font-bold inline">{data.name}</h2>{data?.condition && <span className='badge badge-success ml-2 font-bold'>{data?.condition}</span>}
+                <h3>Original Price: <span className='font-semibold'>${data.originalPrice}</span> </h3>
+                <h3>Resale Price: <span className='font-semibold'>${data.resalePrice}</span> </h3>
+                <h3>Used: <span className='font-semibold'>{data.usedTime} Year</span> </h3>
+            </div>
+            <div className="">
+                <label htmlFor="my-modal-3" className='btn btn-success w-full font-semibold'>Book Now</label>
+
             </div>
         </div>
     );

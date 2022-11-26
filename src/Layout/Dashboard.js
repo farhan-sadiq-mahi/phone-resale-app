@@ -48,8 +48,8 @@ const Dashboard = () => {
                         {
                             data.userRole === 'admin' &&
                             <>
-                                <li><Link>All Sellers</Link></li>
-                                <li><Link>all Buyers</Link></li>
+                                <li><Link to={'/dashboard/allsellers'}>All Sellers</Link></li>
+                                <li><Link to={'/dashboard/allbuyers'}>all Buyers</Link></li>
                                 <li><Link>Reported Items</Link></li>
                             </>
                         }

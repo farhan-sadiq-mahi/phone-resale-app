@@ -9,6 +9,7 @@ const CategoryItemCard = ({ data }) => {
     const [isVerified, setIsVerified] = useState(false);
     const onSubmit = (data) => {
         console.log(data);
+        //modal data
     }
     useEffect(() => {
         fetch(`http://localhost:5000/sellerVerified?email=${data.sellerEmail}`)
@@ -21,6 +22,7 @@ const CategoryItemCard = ({ data }) => {
     const { register, handleSubmit } = useForm();
     return (
         <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md">
+            {/* card */}
             <div className="flex space-x-4">
                 <div className="flex flex-col space-y-1">
                     <p>seller : <span className="text-sm font-semibold">{data.sellerName}</span>{

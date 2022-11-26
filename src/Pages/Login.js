@@ -47,7 +47,7 @@ const Login = () => {
                 };
 
                 fetch('http://localhost:5000/setuser', {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         "content-type": 'application/json'
                     },
