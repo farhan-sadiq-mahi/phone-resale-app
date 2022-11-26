@@ -10,8 +10,6 @@ const MyProducts = () => {
         queryKey: ['products', user],
         queryFn: () => fetch(`http://localhost:5000/myproducts?email=${user.email}`)
             .then(res => res.json())
-    }, {
-        refetchInterval: 1000,
     })
 
     const handleProductDelete = (id) => {

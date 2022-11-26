@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const AddProduct = () => {
     const { register, handleSubmit } = useForm();
+    const { user } = useContext(AuthContext);
+
+
     const onSubmit = data => {
-        console.log(data)
+        const sellerName = user.displayName;
+        const sellerEmail = user.email;
+        const productDetails = { ...data, sellerEmail, sellerName }
+        console.log(productDetails);
+        // fetch(`http://localhost:5000/addproduct?email=${user.email}`, {
+        //     method: 'POST',
+        //     headers: {
+        //         "content-type": 'application/json'
+        //     },
+        //     body: JSON.stringify(productDetails)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => console.log(data));
+
+
+
+
     }
     return (
         <div className='container mx-auto bg-gray-100'>
