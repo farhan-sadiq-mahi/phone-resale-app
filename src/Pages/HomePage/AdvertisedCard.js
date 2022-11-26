@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoVerified } from 'react-icons/go'
-
-import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const AdvertisedCard = ({ data }) => {
 
-    const { user } = useContext(AuthContext);
     const [isVerified, setIsVerified] = useState(false);
     useEffect(() => {
         fetch(`http://localhost:5000/sellerVerified?email=${data.sellerEmail}`)
@@ -31,7 +29,7 @@ const AdvertisedCard = ({ data }) => {
                 <h3>Used: <span className='font-semibold'>{data.usedTime} Year</span> </h3>
             </div>
             <div className="">
-                <label htmlFor="my-modal-3" className='btn btn-success w-full font-semibold'>Book Now</label>
+                <Link to={`/category/${data.category}`} className='btn btn-success w-full font-semibold'>Book Now</Link>
 
             </div>
         </div>

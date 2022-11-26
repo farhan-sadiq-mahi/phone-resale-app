@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { GoVerified } from 'react-icons/go'
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { MdReport } from 'react-icons/md';
 
 const CategoryItemCard = ({ data }) => {
     const { user } = useContext(AuthContext);
@@ -17,7 +18,14 @@ const CategoryItemCard = ({ data }) => {
             .then(data => setIsVerified(data.isVerified))
     }, [data.sellerEmail])
 
-
+    const reportItem = id => {
+        fetch(`http://localhost:5000/reportedproduct?id=${id}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success('Successfully Reported')
+            })
+    }
 
     const { register, handleSubmit } = useForm();
     return (
@@ -38,6 +46,11 @@ const CategoryItemCard = ({ data }) => {
                 <h3>Original Price: <span className='font-semibold'>${data.originalPrice}</span> </h3>
                 <h3>Resale Price: <span className='font-semibold'>${data.resalePrice}</span> </h3>
                 <h3>Used: <span className='font-semibold'>{data.usedTime} Year</span> </h3>
+                <div className='my-2'>
+                    <button onClick={() => reportItem(data._id)} className='btn btn-error btn-xs'>Report to Admin
+                        <MdReport className='ml-1' />
+                    </button>
+                </div>
             </div>
             <div className="">
                 <label htmlFor="my-modal-3" className='btn btn-success w-full font-semibold'>Book Now</label>
