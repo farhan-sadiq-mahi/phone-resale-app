@@ -12,7 +12,8 @@ const Navbar = () => {
     const pages = [
         { name: "Home", to: '/' },
         { name: "All Categories", to: '/allcategories' },
-        { name: "Dashboard", to: '/dashboard' }
+        { name: "Dashboard", to: '/dashboard' },
+        { name: "Blog", to: '/blog' }
     ]
     return (
         <div className='sticky top-0 z-30'>

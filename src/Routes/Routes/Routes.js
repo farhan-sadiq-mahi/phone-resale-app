@@ -4,6 +4,7 @@ import Main from "../../Layout/Main";
 import AllBuyers from "../../Pages/AdminDashboard.js/AllBuyers";
 import AllSellers from "../../Pages/AdminDashboard.js/AllSellers";
 import AllCategories from "../../Pages/AllCategories/AllCategories";
+import Blog from "../../Pages/Blog/Blog";
 import CategoryItems from "../../Pages/CategoryItems/CategoryItems";
 import HomePage from "../../Pages/HomePage/HomePage";
 import Login from "../../Pages/Login";
@@ -36,6 +37,10 @@ const routes = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />
+            },
+            {
+                path: '/blog',
+                element: <Blog />
             }
         ]
     },
