@@ -12,6 +12,7 @@ const MyProducts = () => {
             .then(res => res.json())
     })
 
+    //delete handler
     const handleProductDelete = (id) => {
         fetch(`http://localhost:5000/deletemyproduct?email=${user.email}&id=${id}`, {
             method: 'DELETE'
@@ -22,7 +23,15 @@ const MyProducts = () => {
                 console.log(data)
             })
     }
-
+    //advertised handler
+    const handleAdvertised = id => {
+        fetch(`http://localhost:5000/advertised?email=${user.email}&id=${id}`)
+            .then(res => res.json())
+            .then(data => {
+                refetch();
+                console.log(data)
+            })
+    }
 
 
     if (isLoading) {
@@ -70,9 +79,9 @@ const MyProducts = () => {
                                         {product?.isSold ? <p className='badge badge-success'>SOLD</p> : <p className='badge badge-info'>UNSOLD</p>}
                                     </td>
                                     <td>
-                                        {!product?.isSold ? <button className="btn btn-secondary btn-xs"
+                                        {!product?.advertised ? <button onClick={() => handleAdvertised(product._id)} className="btn btn-secondary btn-xs"
                                         >Advertise</button> : <button disabled className="btn btn-secondary btn-xs"
-                                        >Advertise</button>}
+                                        >Advertised</button>}
 
                                     </td>
                                     <th>

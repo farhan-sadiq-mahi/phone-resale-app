@@ -9,8 +9,8 @@ const HomePage = () => {
         <>
             <HeroComponent />
             <FeatureComponent />
-            <AdvertisedItems />
             <HomeCategory />
+            <AdvertisedItems />
         </>
     );
 };

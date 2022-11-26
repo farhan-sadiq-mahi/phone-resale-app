@@ -15,7 +15,6 @@ const AddProduct = () => {
         const sellerEmail = user.email;
         const uploadTime = format(new Date(), 'PP');
         const productDetails = { ...data, sellerEmail, sellerName, uploadTime }
-        console.log(productDetails);
 
         fetch(`http://localhost:5000/addproduct?email=${user.email}`, {
             method: 'POST',
