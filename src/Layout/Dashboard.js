@@ -12,6 +12,8 @@ const Dashboard = () => {
         queryFn: () => fetch(`http://localhost:5000/getrole?email=${user.email}`)
             .then(res => res.json())
     })
+
+
     if (isLoading) {
         return <Loader />
     }
@@ -26,7 +28,7 @@ const Dashboard = () => {
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden my-5">Dashboard Menu</label>
 
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side ">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content --> */}

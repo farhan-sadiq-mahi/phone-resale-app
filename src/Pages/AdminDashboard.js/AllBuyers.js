@@ -5,11 +5,21 @@ import Loader from '../../SharedComponent/Loader';
 
 const AllBuyers = () => {
     const { user } = useContext(AuthContext);
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: () => fetch(`http://localhost:5000/getallbuyers?email=${user.email}`)
             .then(res => res.json())
     })
+    const deleteHandler = id => {
+        fetch(`http://localhost:5000/deleteuser?email=${user.email}&id=${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                refetch();
+            })
+    }
     if (isLoading) {
         return <Loader />
     }
@@ -50,7 +60,7 @@ const AllBuyers = () => {
                                     </td>
                                     <td></td>
                                     <th>
-                                        <button className="btn btn-error btn-xs">Delete</button>
+                                        <button onClick={() => deleteHandler(buyer._id)} className="btn btn-error btn-xs">Delete</button>
                                     </th>
                                 </tr>)
                         }
