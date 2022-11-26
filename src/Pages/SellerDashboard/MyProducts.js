@@ -32,7 +32,7 @@ const MyProducts = () => {
     }
 
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto h-screen bg-gray-100'>
             <h1 className='text-4xl font-bold merFont text-center my-5'>My Products</h1>
             <div className="overflow-x-auto w-full">
                 {data.products.length ?

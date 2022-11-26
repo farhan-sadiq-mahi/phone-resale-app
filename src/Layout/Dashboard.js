@@ -40,7 +40,7 @@ const Dashboard = () => {
                         {
                             data.userRole === 'seller' &&
                             <>
-                                <li><Link>Add A Product</Link></li>
+                                <li><Link to={'/dashboard/addproduct'}>Add A Product</Link></li>
                                 <li><Link to={'/dashboard/myproducts'}>My Product</Link></li>
                             </>
                         }
