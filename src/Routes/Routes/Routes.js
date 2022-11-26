@@ -6,6 +6,7 @@ import AllSellers from "../../Pages/AdminDashboard.js/AllSellers";
 import AllCategories from "../../Pages/AllCategories/AllCategories";
 import Blog from "../../Pages/Blog/Blog";
 import CategoryItems from "../../Pages/CategoryItems/CategoryItems";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import HomePage from "../../Pages/HomePage/HomePage";
 import Login from "../../Pages/Login";
 import AddProduct from "../../Pages/SellerDashboard/AddProduct";
@@ -17,6 +18,7 @@ const routes = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/',
@@ -47,6 +49,7 @@ const routes = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivetRoute><Dashboard /></PrivetRoute>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/dashboard/addproduct',
