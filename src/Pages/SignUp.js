@@ -52,14 +52,25 @@ const SignUp = () => {
             setError('Your password is not long enough')
             return
         }
+
+        let userInfo = {}
         if (seller) {
             role = 'seller';
+            userInfo = {
+                name: fullName,
+                email,
+                img: photoURL,
+                role,
+                isVerified: false
+            }
         }
-        const userInfo = {
-            name: fullName,
-            email,
-            img: photoURL,
-            role
+        else {
+            userInfo = {
+                name: fullName,
+                email,
+                img: photoURL,
+                role
+            }
         }
 
 

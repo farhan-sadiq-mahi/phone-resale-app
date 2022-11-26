@@ -1,26 +1,37 @@
+import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const AddProduct = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const onSubmit = data => {
         const sellerName = user.displayName;
         const sellerEmail = user.email;
-        const productDetails = { ...data, sellerEmail, sellerName }
+        const uploadTime = format(new Date(), 'PP');
+        const productDetails = { ...data, sellerEmail, sellerName, uploadTime }
         console.log(productDetails);
-        // fetch(`http://localhost:5000/addproduct?email=${user.email}`, {
-        //     method: 'POST',
-        //     headers: {
-        //         "content-type": 'application/json'
-        //     },
-        //     body: JSON.stringify(productDetails)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+
+        fetch(`http://localhost:5000/addproduct?email=${user.email}`, {
+            method: 'POST',
+            headers: {
+                "content-type": 'application/json'
+            },
+            body: JSON.stringify(productDetails)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    console.log(data);
+                    reset();
+                    navigate('/dashboard/myproducts')
+                }
+            });
 
 
 
@@ -41,12 +52,14 @@ const AddProduct = () => {
                         />
                         <input
                             type="number"
+                            required
                             {...register("phoneNumber")}
                             placeholder="Phone Number"
                             className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                         />
                         <input
                             type="text"
+                            required
                             {...register("category")}
                             placeholder="Category"
                             className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
@@ -54,6 +67,7 @@ const AddProduct = () => {
 
                         <input
                             type="text"
+                            required
                             name="productImg"
                             {...register("productImg")}
                             placeholder="Image Link"
@@ -99,18 +113,21 @@ const AddProduct = () => {
                         <div className="flex flex-row space-x-4">
 
                             <input
+                                required
                                 type="text"
                                 {...register("resalePrice")}
                                 placeholder="Resale Price"
                                 className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                             />
                             <input
+                                required
                                 type="text"
                                 {...register("originalPrice")}
                                 placeholder="Original Price"
                                 className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                             />
                             <input
+                                required
                                 type="text"
                                 {...register("usedTime")}
                                 placeholder="Product Used"
@@ -119,6 +136,7 @@ const AddProduct = () => {
                         </div>
 
                         <input
+                            required
                             type="text"
                             {...register("location")}
                             placeholder="Location"
@@ -126,6 +144,7 @@ const AddProduct = () => {
                         />
 
                         <textarea
+                            required
                             type="text"
                             {...register("description")}
                             placeholder="Description"

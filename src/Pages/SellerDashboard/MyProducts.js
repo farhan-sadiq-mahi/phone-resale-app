@@ -94,7 +94,8 @@ const MyProducts = () => {
                         </tfoot>
 
                     </table>
-                    : <h1 className='text-2xl font-semibold text-center my-5'>You Don't Have Any Product Right Now, <br /> Add Products <Link className='underline' to={'/dashboard/addproduct'}>Here</Link></h1>
+                    :
+                    <h1 className='text-2xl font-semibold text-center my-5'>You Don't Have Any Product Right Now, <br /> Add Products <Link className='underline' to={'/dashboard/addproduct'}>Here</Link></h1>
                 }
             </div>
         </div>

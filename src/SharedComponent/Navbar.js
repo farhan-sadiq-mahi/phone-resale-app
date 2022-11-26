@@ -33,10 +33,10 @@ const Navbar = () => {
 
 
 
-                    <a className="text-3xl font-bold leading-none" href="/">
+                    <Link className="text-3xl font-bold leading-none" to="/">
                         {/* logo */}
                         <img src={logo} className="h-10" alt="" />
-                    </a>
+                    </Link>
 
 
                     {/*   profile and settings button for mobile  */}
@@ -137,9 +137,9 @@ const Navbar = () => {
 
 
                             {/* logo for the menu btn */}
-                            <a className="mr-auto text-3xl font-bold leading-none" href="/">
+                            <Link className="mr-auto text-3xl font-bold leading-none" to="/">
                                 <img src={logo} className="h-12" alt="" />
-                            </a>
+                            </Link>
 
                             {/* navbar close button */}
                             <button onClick={() => { setIsMenuOn(!isMenuOn) }} >

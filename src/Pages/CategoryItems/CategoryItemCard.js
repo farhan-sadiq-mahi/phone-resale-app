@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { GoVerified } from 'react-icons/go'
@@ -6,16 +6,25 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const CategoryItemCard = ({ data }) => {
     const { user } = useContext(AuthContext);
+    const [isVerified, setIsVerified] = useState(false);
     const onSubmit = (data) => {
         console.log(data);
     }
+    useEffect(() => {
+        fetch(`http://localhost:5000/sellerVerified?email=${data.sellerEmail}`)
+            .then(res => res.json())
+            .then(data => setIsVerified(data.isVerified))
+    }, [data.sellerEmail])
+
+
+
     const { register, handleSubmit } = useForm();
     return (
         <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md">
             <div className="flex space-x-4">
                 <div className="flex flex-col space-y-1">
                     <p>seller : <span className="text-sm font-semibold">{data.sellerName}</span>{
-                        data.isVerified && <span title='verified'><GoVerified className='inline ml-2  text-blue-700' /></span>
+                        isVerified && <span title='verified'><GoVerified className='inline ml-2  text-blue-700' /></span>
                     }
                     </p>
                     <span className="text-xs dark:text-gray-400">{data.uploadTime}</span>
@@ -23,7 +32,7 @@ const CategoryItemCard = ({ data }) => {
             </div>
             <div>
                 <img src={data.productImg} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
-                <h2 className="mb-1 text-xl font-bold">{data.name}</h2>
+                <h2 className="mb-1 text-xl font-bold inline">{data.name}</h2>{data?.condition && <span className='badge badge-success ml-2 font-bold'>{data?.condition}</span>}
                 <h3>Original Price: <span className='font-semibold'>${data.originalPrice}</span> </h3>
                 <h3>Resale Price: <span className='font-semibold'>${data.resalePrice}</span> </h3>
                 <h3>Used: <span className='font-semibold'>{data.usedTime} Year</span> </h3>
