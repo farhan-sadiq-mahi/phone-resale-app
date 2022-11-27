@@ -6,6 +6,7 @@ import AllSellers from "../../Pages/AdminDashboard.js/AllSellers";
 import ReportedItems from "../../Pages/AdminDashboard.js/ReportedItems";
 import AllCategories from "../../Pages/AllCategories/AllCategories";
 import Blog from "../../Pages/Blog/Blog";
+import MyOrders from "../../Pages/BuyersDashboard.js/MyOrders";
 import CategoryItems from "../../Pages/CategoryItems/CategoryItems";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import HomePage from "../../Pages/HomePage/HomePage";
@@ -71,6 +72,10 @@ const routes = createBrowserRouter([
             {
                 path: '/dashboard/reporteditems',
                 element: <ReportedItems />
+            },
+            {
+                path: '/dashboard/myorders',
+                element: <MyOrders />
             },
         ]
     }

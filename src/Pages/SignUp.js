@@ -24,7 +24,7 @@ const SignUp = () => {
     }
     // set the jwt token 
     const jwtToken = currentUser => {
-        fetch('', {
+        fetch('http://localhost:5000/jwt', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -16,7 +16,7 @@ const Login = () => {
 
     const jwtToken = currentUser => {
         // console.log(currentUser)
-        fetch('', {
+        fetch('http://localhost:5000/jwt', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -59,7 +59,7 @@ const Login = () => {
 
 
                 //get jwt token
-                // jwtToken(currentUser);
+                jwtToken(currentUser);
                 navigate(from, { replace: true })
             })
             .catch(error => console.error(error))

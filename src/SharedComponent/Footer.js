@@ -7,33 +7,33 @@ const Footer = () => {
             <section className="bg-info">
                 <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
                     <nav className="flex flex-wrap justify-center -mx-5 -my-2 font-medium text-white">
-                        <div class="px-5 py-2">
-                            <Link to="/" class="text-base leading-6">
+                        <div className="px-5 py-2">
+                            <Link to="/" className="text-base leading-6">
                                 Home
                             </Link>
                         </div>
-                        <div class="px-5 py-2">
-                            <Link to="/allcategories" class="text-base leading-6">
+                        <div className="px-5 py-2">
+                            <Link to="/allcategories" className="text-base leading-6">
                                 All Categories
                             </Link>
                         </div>
-                        <div class="px-5 py-2">
-                            <Link to="/dashboard" class="text-base leading-6">
+                        <div className="px-5 py-2">
+                            <Link to="/dashboard" className="text-base leading-6">
                                 Dashboard
                             </Link>
                         </div>
-                        <div class="px-5 py-2">
-                            <Link to="/blog" class="text-base leading-6">
+                        <div className="px-5 py-2">
+                            <Link to="/blog" className="text-base leading-6">
                                 Blog
                             </Link>
                         </div>
-                        <div class="px-5 py-2">
-                            <Link href="#" class="text-base leading-6">
+                        <div className="px-5 py-2">
+                            <Link href="#" className="text-base leading-6">
                                 Contact
                             </Link>
                         </div>
-                        <div class="px-5 py-2">
-                            <Link href="#" class="text-base leading-6">
+                        <div className="px-5 py-2">
+                            <Link href="#" className="text-base leading-6">
                                 Terms
                             </Link>
                         </div>

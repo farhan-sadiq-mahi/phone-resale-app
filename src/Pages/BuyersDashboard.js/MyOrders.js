@@ -3,46 +3,36 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Loader from '../../SharedComponent/Loader';
 
-const AllSellers = () => {
-    const { user } = useContext(AuthContext);
-    const { data, isLoading, refetch } = useQuery({
-        queryKey: ['sellers'],
-        queryFn: () => fetch(`http://localhost:5000/getallsellers?email=${user.email}`)
-            .then(res => res.json())
+const MyOrders = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const { data, isLoading } = useQuery({
+        queryKey: ['orders'],
+        queryFn: () => fetch(`http://localhost:5000/mybooking?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('jwt-token')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    logOut();
+                }
+                return res.json()
+            })
     })
 
-
-    const verifySeller = id => {
-        fetch(`http://localhost:5000/verifyseller?email=${user.email}&id=${id}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                refetch();
-            })
-    }
-    const deleteHandler = id => {
-        fetch(`http://localhost:5000/deleteuser?email=${user.email}&id=${id}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                refetch();
-            })
-    }
     if (isLoading) {
         return <Loader />
     }
     return (
         <div className='container'>
-            <h1 className='text-4xl font-bold merFont text-center my-5'>All Sellers</h1>
+            <h1 className='text-4xl font-bold merFont text-center my-5'> My Orders</h1>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Status</th>
+                            <th>Email</th>
                             <th></th>
                             <th>Action</th>
                             <th></th>
@@ -51,30 +41,28 @@ const AllSellers = () => {
                     <tbody>
 
                         {
-                            data.map(seller =>
-                                <tr key={seller._id}>
+                            data.map(order =>
+                                <tr key={order._id}>
                                     <td>
                                         <div className="flex items-center space-x-3">
                                             <div className="avatar">
                                                 <div className="mask mask-squircle w-12 h-12">
-                                                    <img src={seller.img} alt="Avatar Tailwind CSS Component" />
+                                                    <img src={order.productImg} alt="Avatar Tailwind CSS Component" />
                                                 </div>
                                             </div>
                                             <div>
-                                                <div className="font-bold">{seller.name}</div>
-                                                <div className="text-sm opacity-50">{seller.email}</div>
+                                                <div className="font-bold">{order.productName}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        {
-                                            seller?.isVerified ? <button className='btn btn-success btn-xs'>Verified</button> :
-                                                <button className='btn btn-info btn-xs' onClick={() => verifySeller(seller._id)}>Verify Now</button>
-                                        }
+                                        {order.price}
                                     </td>
                                     <td></td>
                                     <th>
-                                        <button onClick={() => deleteHandler(seller._id)} className="btn btn-error btn-xs">Delete</button>
+                                        {
+                                            order.paid ? <button className="btn btn-success btn-xs">Paid</button> : <button className="btn btn-info btn-xs">Pay Now</button>
+                                        }
                                     </th>
                                 </tr>)
                         }
@@ -84,7 +72,7 @@ const AllSellers = () => {
                     <tfoot>
                         <tr>
                             <th>Name</th>
-                            <th>Status</th>
+                            <th>Email</th>
                             <th></th>
                             <th>Action</th>
                             <th></th>
@@ -97,4 +85,4 @@ const AllSellers = () => {
     );
 };
 
-export default AllSellers;
+export default MyOrders;

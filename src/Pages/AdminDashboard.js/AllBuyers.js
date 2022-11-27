@@ -4,12 +4,23 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Loader from '../../SharedComponent/Loader';
 
 const AllBuyers = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['buyers'],
-        queryFn: () => fetch(`http://localhost:5000/getallbuyers?email=${user.email}`)
-            .then(res => res.json())
+        queryFn: () => fetch(`http://localhost:5000/getallbuyers?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('jwt-token')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    logOut();
+                }
+                return res.json()
+            })
     })
+
+
     const deleteHandler = id => {
         fetch(`http://localhost:5000/deleteuser?email=${user.email}&id=${id}`, {
             method: "DELETE"
