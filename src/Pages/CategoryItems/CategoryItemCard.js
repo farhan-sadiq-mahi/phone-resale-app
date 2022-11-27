@@ -1,50 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { GoVerified } from 'react-icons/go'
-import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { MdReport } from 'react-icons/md';
 
-const CategoryItemCard = ({ data }) => {
-    const { user } = useContext(AuthContext);
+
+const CategoryItemCard = ({ data: cardData, setModalData, setModalStatus }) => {
+
     const [isVerified, setIsVerified] = useState(false);
-    const [modalStatus, setModalStatus] = useState(true);
+    const modalDetails = () => {
+        setModalStatus(true);
+        setModalData(cardData)
 
-    const name = user?.displayName;
-    const email = user?.email;
-    const productName = data.name;
-    const price = data.resalePrice;
-    const productImg = data.productImg;
-    const productID = data._id;
-
-
-
-    const onSubmit = (data) => {
-        setModalStatus(false);
-        const bookingDetails = {
-            ...data,
-            name, email, productName, price, productImg, productID
-        }
-        fetch('http://localhost:5000/booking', {
-            method: 'POST',
-            headers: {
-                "content-type": 'application/json'
-            },
-            body: JSON.stringify(bookingDetails)
-        })
-            .then(res => res.json())
-            .then(data => {
-                toast.success('Successfully Booked')
-                setModalStatus(true)
-            })
-
-        //modal data
     }
+
     useEffect(() => {
-        fetch(`http://localhost:5000/sellerVerified?email=${data.sellerEmail}`)
+        fetch(`http://localhost:5000/sellerVerified?email=${cardData.sellerEmail}`)
             .then(res => res.json())
             .then(data => setIsVerified(data.isVerified))
-    }, [data.sellerEmail])
+    }, [cardData.sellerEmail])
 
     const reportItem = id => {
         fetch(`http://localhost:5000/reportedproduct?id=${id}`)
@@ -55,93 +28,34 @@ const CategoryItemCard = ({ data }) => {
             })
     }
 
-    const { register, handleSubmit } = useForm();
     return (
         <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md">
             {/* card */}
             <div className="flex space-x-4">
                 <div className="flex flex-col space-y-1">
-                    <p>seller : <span className="text-sm font-semibold">{data.sellerName}</span>{
+                    <p>seller : <span className="text-sm font-semibold">{cardData.sellerName}</span>{
                         isVerified && <span title='verified'><GoVerified className='inline ml-2  text-blue-700' /></span>
                     }
                     </p>
-                    <span className="text-xs dark:text-gray-400">{data.uploadTime}</span>
+                    <span className="text-xs dark:text-gray-400">{cardData.uploadTime}</span>
                 </div>
             </div>
             <div>
-                <img src={data.productImg} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
-                <h2 className="mb-1 text-xl font-bold inline">{data.name}</h2>{data?.condition && <span className='badge badge-success ml-2 font-bold'>{data?.condition}</span>}
-                <h3>Original Price: <span className='font-semibold'>${data.originalPrice}</span> </h3>
-                <h3>Resale Price: <span className='font-semibold'>${data.resalePrice}</span> </h3>
-                <h3>Used: <span className='font-semibold'>{data.usedTime} Year</span> </h3>
+                <img src={cardData.productImg} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
+                <h2 className="mb-1 text-xl font-bold inline">{cardData.name}</h2>{cardData?.condition && <span className='badge badge-success ml-2 font-bold'>{cardData?.condition}</span>}
+                <h3>Original Price: <span className='font-semibold'>${cardData.originalPrice}</span> </h3>
+                <h3>Resale Price: <span className='font-semibold'>${cardData.resalePrice}</span> </h3>
+                <h3>Used: <span className='font-semibold'>{cardData.usedTime} Year</span> </h3>
                 <div className='my-2'>
-                    <button onClick={() => reportItem(data._id)} className='btn btn-error btn-xs'>Report to Admin
+                    <button onClick={() => reportItem(cardData._id)} className='btn btn-error btn-xs'>Report to Admin
                         <MdReport className='ml-1' />
                     </button>
                 </div>
             </div>
             <div className="">
-                <label htmlFor="my-modal-3" className='btn btn-success w-full font-semibold'>Book Now</label>
+                <label htmlFor="my-modal-3" className='btn btn-success w-full font-semibold' onClick={modalDetails}>Book Now</label>
 
             </div>
-
-            {/* Booking Modal*/}
-            {modalStatus &&
-                <>
-                    <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-                    <div className="modal">
-                        <div className="modal-box relative">
-                            <label htmlFor="my-modal-3" className="btn btn-sm btn-circle bg-info border-none absolute right-4 top-4">✕</label>
-                            <h1 className='text-4xl font-bold merFont text-center my-2'>Book Now</h1>
-                            <form onSubmit={handleSubmit(onSubmit)} className="bg-white px-6 py-8 text-black w-full">
-                                <input
-                                    type="text"
-                                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                                    defaultValue={user?.displayName}
-                                    disabled
-                                    placeholder="Full Name" />
-
-                                <input
-                                    type="text"
-                                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                                    disabled
-                                    defaultValue={user?.email}
-                                    placeholder="Email" />
-
-                                <input
-                                    type="text"
-                                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                                    disabled
-                                    defaultValue={data.name}
-                                    placeholder="Item" />
-                                <input
-                                    type="number"
-                                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                                    disabled
-                                    defaultValue={data.resalePrice}
-                                    placeholder="price" />
-                                <input
-                                    type="number"
-                                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                                    {...register("phoneNumber")}
-                                    placeholder="Phone Number" />
-                                <input
-                                    type="text"
-                                    className="block border border-grey-light w-full p-3 rounded mb-4"
-                                    {...register("location")}
-                                    placeholder="Location" />
-
-                                <input
-                                    type='submit'
-                                    htmlFor="my-modal-3"
-                                    className="w-full text-center py-3 rounded bg-info text-white hover:bg-info-focus focus:outline-none my-1"
-                                />
-
-                            </form>
-                        </div>
-                    </div>
-                </>
-            }
         </div>
     );
 };

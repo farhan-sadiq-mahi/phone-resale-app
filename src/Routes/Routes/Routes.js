@@ -11,6 +11,7 @@ import CategoryItems from "../../Pages/CategoryItems/CategoryItems";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import HomePage from "../../Pages/HomePage/HomePage";
 import Login from "../../Pages/Login";
+import Payment from "../../Pages/Payment/Payment";
 import AddProduct from "../../Pages/SellerDashboard/AddProduct";
 import MyProducts from "../../Pages/SellerDashboard/MyProducts";
 import SignUp from "../../Pages/SignUp";
@@ -76,6 +77,10 @@ const routes = createBrowserRouter([
             {
                 path: '/dashboard/myorders',
                 element: <MyOrders />
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment />
             },
         ]
     }

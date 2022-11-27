@@ -59,19 +59,54 @@ const AddProduct = () => {
                         <input
                             type="text"
                             required
-                            {...register("category")}
-                            placeholder="Category"
-                            className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                        />
-
-                        <input
-                            type="text"
-                            required
                             name="productImg"
                             {...register("productImg")}
                             placeholder="Image Link"
                             className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                         />
+                        {/* <input
+                            type="text"
+                            required
+                            {...register("category")}
+                            placeholder="Category"
+                            className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                        /> */}
+
+                        <fieldset className="w-full"
+                        >
+                            <legend className=" text-gray-500 pt-4">Product's Category</legend>
+                            <div className="block pt-3 pb-2 space-x-4">
+                                <label>
+                                    <input
+                                        {...register("category")}
+                                        type="radio"
+                                        value="Iphone"
+
+                                        className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                    />
+                                    Iphone
+                                </label>
+                                <label>
+                                    <input
+                                        {...register("category")}
+                                        type="radio"
+                                        value="Samsung"
+                                        className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                    />
+                                    Samsung
+                                </label>
+                                <label>
+                                    <input
+                                        {...register("category")}
+                                        type="radio"
+                                        value="Oneplus"
+                                        className="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                                    />Oneplus
+                                </label>
+                            </div>
+                        </fieldset>
+
+
 
                         <fieldset className="w-full"
                         >
