@@ -1,4 +1,4 @@
-### Hand Phone Store
+### Phone Resale Store
 
 ## Welcome to my hand-phone-store site repo
 ##Live site Link 
